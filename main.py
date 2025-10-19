@@ -9,8 +9,6 @@ import asyncio
 import logging
 import aiohttp
 import urllib.parse
-# import aiohttp_jinja2 # REMOVED: As per instruction
-# import jinja2 # REMOVED: As per instruction
 from datetime import datetime
 from motor.motor_asyncio import AsyncIOMotorClient
 from aiohttp import web, ClientConnectionError, ClientTimeout
@@ -264,7 +262,7 @@ class TMDbAPI:
 
 # --- Database and Collection Setup ---
 db_client = AsyncIOMotorClient(Config.MONGO_URI)
-db = db_client['KeralaCaptainBotDB']
+db = db_client['BotCDatabase']
 
 # Primary collection for all normal operations
 media_collection = db['media']
@@ -598,7 +596,7 @@ async def stream_handler(request: web.Request):
     try:
         # --- SECURITY CHECK 1: Referer Check ---
         referer = request.headers.get('Referer')
-        allowed_referer = 'https://keralacaptain.rf.gd/' # Your WordPress domain
+        allowed_referer = 'https://XTubePro.xo.je/' # Your WordPress domain
 
         if not referer or not referer.startswith(allowed_referer):
             LOGGER.warning(f"Blocked hotlink attempt. Referer: {referer}")
